@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Confirmação de Inscrição</title>
+    <style>
+      /* Definindo uma fonte padrão limpa para o corpo */
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+
+      /* Estilização para o título principal */
+      h2 {
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      /* Definindo estilos para a lista */
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      /* Estilo para o texto de destaque */
+      strong {
+        font-weight: bold;
+      }
+
+      /* Estilo para o texto de rodapé */
+      .footer-text {
+        margin-top: 30px;
+        font-style: italic;
+      }
+
+      /* Adicionando algum espaçamento entre os parágrafos */
+      p {
+        margin-bottom: 15px;
+      }
+
+      a {
+        color: #333; /* define a mesma cor que o restante do texto */
+        text-decoration: none; /* remove o sublinhado */
+      }
+
+      a:hover,
+      a:active,
+      a:focus {
+        color: #555; /* uma cor um pouco mais escura para o hover */
+        text-decoration: underline; /* sublinhado ao passar o mouse */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Prezado(a) {{ name }},</h2>
+    <p>
+      É com grande satisfação que confirmamos sua inscrição no evento
+      <strong>1º Fórum Trabalhista CNA</strong>.
+    </p>
+    <p>Detalhes do evento:</p>
+    <ul>
+      <li><strong>Data:</strong> 5 de Outubro</li>
+      <li>
+        <strong>Horário:</strong> De 8h da manhã às 13h da tarde, horário de
+        Brasília
+      </li>
+      <li>
+        <strong>Local:</strong> SGAN - Asa Norte, Brasília - DF, 70830-903
+      </li>
+    </ul>
+    <p>Seu código de inscrição é: <strong>{{ code }}</strong></p>
+    <p>
+      Caso não tenha baixado o ingresso no ato da inscrição, enviámos-o anexado
+      neste e-mail. Solicitamos que apresente-o na entrada do evento para
+      garantir seu acesso.
+    </p>
+    <br />
+    <p>
+      Agradecemos sua participação e estamos felizes por contar com sua
+      presença. Desejamos que tenha um ótimo evento.
+    </p>
+    <p class="footer-text">Atenciosamente,</p>
+    <p>Sistema CNA</p>
+  </body>
+</html>

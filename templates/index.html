@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="static/images/fav.png"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=0.7" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <title>Inscrição | 1º Fórum Trabalhista</title>
+  </head>
+  <body>
+    {% if pdf_link %}
+    <div class="thanks-message">
+      <!-- Ícone de check grande -->
+      <i class="fas fa-check-circle fa-5x"></i>
+
+      <p>
+        Prezado participante, agradecemos por sua inscrição no evento "1º Fórum
+        Trabalhista CNA". Seu ingresso foi enviado para o e-mail fornecido.
+        Contudo, você pode baixar uma cópia diretamente através do link abaixo.
+      </p>
+      <a href="{{ pdf_link }}" class="download-btn">Download do Ingresso</a>
+    </div>
+    {% else %}
+
+    <form method="post">
+      <div class="welcome-message">
+        <h1>1º Fórum Trabalhista CNA</h1>
+      </div>
+      {{ form.hidden_tag() }}
+
+      <label>{{ form.name.label }}</label>
+      {{ form.name() }}<br />
+
+      <label>{{ form.cpf.label }}</label>
+      {{ form.cpf(id="cpf") }}<br />
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert {{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <label>{{ form.email.label }}</label>
+      {{ form.email() }}<br />
+
+      <label>{{ form.state.label }}</label>
+      {{ form.state() }}<br />
+
+      <label>{{ form.city.label }}</label>
+      {{ form.city() }}<br />
+
+      <label>{{ form.company_name.label }}</label>
+      {{ form.company_name() }}<br />
+
+      <label>{{ form.role.label }}</label>
+      {{ form.role() }}<br />
+
+      {{ form.submit() }}
+    </form>
+    {% endif %}
+  </body>
+</html>

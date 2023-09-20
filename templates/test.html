@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visualizar Inscrições</title>
+  </head>
+  <body>
+    <h1>Registros</h1>
+    <a href="{{ url_for('export_registrations_xlsx') }}">Download XLSX</a>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Email</th>
+          <th>Estado</th>
+          <th>Cidade</th>
+          <th>Nome da Empresa</th>
+          <th>Cargo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for registration in registrations %}
+        <tr>
+          <td>{{ registration.code }}</td>
+          <td>{{ registration.name }}</td>
+          <td>{{ registration.cpf }}</td>
+          <td>{{ registration.email }}</td>
+          <td>{{ registration.state }}</td>
+          <td>{{ registration.city }}</td>
+          <td>{{ registration.company_name }}</td>
+          <td>{{ registration.role }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
