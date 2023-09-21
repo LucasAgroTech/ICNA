@@ -23,6 +23,13 @@ app.config['SECRET_KEY'] = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://cnivqiqnrnmrsu:542f156128aa2ebeca28cab03af01d727dadfdf04570e0954062774156cb6c03@ec2-34-235-108-214.compute-1.amazonaws.com:5432/dgfmsdkpr5tof'
 db = SQLAlchemy(app)
 
+app.config["MAIL_SERVER"] = "smtp.hostinger.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_TLS"] = False
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = os.environ["MAIL_USERNAME"]
+app.config["MAIL_PASSWORD"] = os.environ["MAIL_PASSWORD"]
+
 mail = Mail(app)
 
 class Registration(db.Model):
