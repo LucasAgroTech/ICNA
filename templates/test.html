@@ -2,37 +2,132 @@
 <html>
   <head>
     <title>Visualizar Inscrições</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="static/images/fav.png"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
+
   <body>
-    <h1>Registros</h1>
-    <a href="{{ url_for('export_registrations_xlsx') }}">Download XLSX</a>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Email</th>
-          <th>Estado</th>
-          <th>Cidade</th>
-          <th>Nome da Empresa</th>
-          <th>Cargo</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for registration in registrations %}
-        <tr>
-          <td>{{ registration.code }}</td>
-          <td>{{ registration.name }}</td>
-          <td>{{ registration.cpf }}</td>
-          <td>{{ registration.email }}</td>
-          <td>{{ registration.state }}</td>
-          <td>{{ registration.city }}</td>
-          <td>{{ registration.company_name }}</td>
-          <td>{{ registration.role }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <style>
+      #contentSection {
+        display: none; /* Esconde a seção por padrão */
+      }
+    </style>
+
+    <!-- Password Modal -->
+    <div
+      class="modal fade"
+      id="passwordModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="passwordModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="passwordModalLabel">Digite a senha</h5>
+          </div>
+          <div class="modal-body">
+            <input
+              type="password"
+              class="form-control"
+              id="passwordInput"
+              placeholder="Senha"
+            />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="checkPassword">
+              Verificar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <h1 class="mb-4">
+        Inscrições Realizadas
+        <span class="badge badge-light">{{ registrations|length }}</span>
+      </h1>
+      <a
+        href="{{ url_for('export_registrations_xlsx') }}"
+        class="btn btn-outline-primary mb-3"
+      >
+        <i class="fas fa-download"></i> Download XLSX
+      </a>
+      <div id="contentSection">
+        <!-- Table -->
+        <table class="table table-responsive-md table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Email</th>
+              <th>Estado</th>
+              <th>Cidade</th>
+              <th>Nome da Empresa</th>
+              <th>Cargo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for registration in registrations %}
+            <tr>
+              <td>{{ registration.code }}</td>
+              <td>{{ registration.name }}</td>
+              <td>{{ registration.cpf }}</td>
+              <td>{{ registration.email }}</td>
+              <td>{{ registration.state }}</td>
+              <td>{{ registration.city }}</td>
+              <td>{{ registration.company_name }}</td>
+              <td>{{ registration.role }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Mostrar o modal assim que a página carregar
+        $("#passwordModal").modal({
+          backdrop: "static", // Isso impede que o usuário feche o modal clicando fora dele
+          keyboard: false, // Isso impede que o modal seja fechado usando a tecla ESC
+          show: true, // Isso exibe o modal
+        });
+
+        // Verificar a senha quando o botão "Verificar" for clicado
+        $("#checkPassword").click(function () {
+          const password = $("#passwordInput").val();
+          if (password === "FO156FO") {
+            $("#passwordModal").modal("hide");
+            $("#contentSection").show(); // Exibe o conteúdo
+          } else {
+            alert("Senha inválida!");
+            $("#passwordInput").val("").focus(); // Limpa o input e coloca o foco nele
+          }
+        });
+      });
+    </script>
   </body>
 </html>
