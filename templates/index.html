@@ -13,6 +13,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     <link
@@ -20,6 +24,12 @@
       href="{{ url_for('static', filename='css/styles.css') }}"
     />
     <title>Inscrição | 1º Fórum Trabalhista</title>
+    <style>
+      h1 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+      }
+    </style>
   </head>
   <body>
     {% if pdf_link %}
@@ -66,6 +76,65 @@
 
       <label>{{ form.role.label }}</label>
       {{ form.role() }}<br />
+
+      <div class="consent-checkbox">
+        {{ form.consent() }}
+        <label for="consent"
+          >Eu concordo com os
+          <a href="#" id="showConsentText">termos de consentimento</a>.</label
+        >
+      </div>
+
+      <div id="consentModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p style="font-weight: bold">
+            Ao realizar minha inscrição, AUTORIZO a Confederação da Agricultura
+            e Pecuária do Brasil – CNA:
+          </p>
+
+          <ul>
+            <li>
+              Sem contrapartidas ou ônus de qualquer natureza, realize o
+              tratamento de meus dados pessoais, em conformidade com a
+              <a
+                href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13709.htm"
+                target="_blank"
+                >Lei nº 13.709, de 14 de agosto de 2018 (Lei Geral de Proteção
+                de Dados - LGPD)</a
+              >
+              e nos termos da
+              <a
+                href="https://www.cnabrasil.org.br/lei-geral-de-protecao-de-dados"
+                target="_blank"
+                >Política de Privacidade do Sistema CNA/SENAR/ICNA</a
+              >.
+            </li>
+            <li>
+              Reproduza, utilize e veicule meu nome, meus
+              depoimentos/entrevistas – falados(as) ou escritos(as) –
+              eventualmente concedidos(as), e minha imagem, relacionados ao
+              evento e obtidos e/ou captados/gravados por qualquer meio e/ou
+              forma durante sua realização. Isso inclui, mas não se limita a,
+              materiais informativos, publicitários, pesquisas, projetos,
+              campanhas institucionais próprios ou de entidades do Sistema
+              CNA/SENAR/ICNA. Podem ser divulgados em qualquer meio, forma e
+              veículo de comunicação, tanto no Brasil quanto no exterior,
+              incluindo cortes, reduções, (re)edições e disponibilização em
+              aplicativos como o Flickr.
+            </li>
+            <li>
+              Resguardo, no entanto, o direito de cancelar essas autorizações,
+              parcial ou integralmente, a qualquer tempo e sem ônus, através do
+              <a
+                href="https://www.cnabrasil.org.br/lei-geral-de-protecao-de-dados"
+                target="_blank"
+                >formulário disponível aqui</a
+              >.
+            </li>
+          </ul>
+        </div>
+      </div>
 
       {{ form.submit() }}
     </form>

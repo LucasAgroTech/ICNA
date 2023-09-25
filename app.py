@@ -3,7 +3,7 @@ from reportlab.lib.pagesizes import landscape
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, EmailField
+from wtforms import StringField, SubmitField, SelectField, EmailField, BooleanField
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from wtforms.validators import DataRequired, Email, Regexp
@@ -80,8 +80,9 @@ class RegistrationForm(FlaskForm):
         ('TO', 'Tocantins')
     ])
     city = StringField('Cidade', validators=[DataRequired()]) 
-    company_name = StringField('Empresa ou Instituição')
-    role = StringField('Cargo')
+    company_name = StringField('Empresa ou Instituição', validators=[DataRequired()])
+    role = StringField('Cargo', validators=[DataRequired()])
+    consent = BooleanField('Ao realizar minha inscrição, AUTORIZO que a Confederação da Agricultura e Pecuária do Brasil – CNA, sem contrapartidas ou ônus de qualquer natureza: (i) realize o tratamento de meus dados pessoais, em conformidade com o disposto na Lei nº 13.709, de 14 de agosto de 2018 (Lei Geral de Proteção de Dados - LGPD) e nos termos da Política de Privacidade do Sistema CNA/SENAR/ICNA (disponível em [http://www.cnabrasil.org.br)](https://www.cnabrasil.org.br/lei-geral-de-protecao-de-dados); (ii) reproduza, utilize e veicule meu nome, meus depoimentos/entrevistas – falados(as) ou escritos(as) – eventualmente concedidos(as), e minha imagem, relacionados ao evento e obtidos e/ou captados/gravados por qualquer meio e/ou forma durante sua realização, em materiais informativos e/ou publicitários, pesquisas, projetos e/ou campanhas institucionais próprios e/ou de qualquer entidade integrante do Sistema CNA/SENAR/ICNA, podendo divulgá-los ao público por qualquer meio, forma e veículo de comunicação, no território nacional e no exterior, e inclusive realizar cortes, reduções e (re)edições para utilização do material e, ainda, disponibilizar as imagens em aplicativos como o flickr, assim como podendo manter salvo o conteúdo para visualizações posteriores em mídias e/ou plataformas digitais, resguardando-me, porém, o direito de cancelar essas autorizações, parcial ou integralmente, a qualquer tempo e sem qualquer ônus, por meio do formulário disponível em [https://www.cnabrasil.org.br/lei-geral-de-protecao-de-dados](https://www.cnabrasil.org.br/lei-geral-de-protecao-de-dados).', validators=[DataRequired()])
     submit = SubmitField('Inscreva-se')
 
 def generate_code():
